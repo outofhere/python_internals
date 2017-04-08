@@ -1,10 +1,11 @@
 import ast
-
+#Creating nodes in two different ways. 
+#First node is a simple multiplying
+#Second one is a printing piece
 node_add = ast.Expression(ast.BinOp(
                 ast.Num(5),
                 ast.Mult(),
                 ast.Num(6)))
-
 node_pt = ast.parse('''
 favs = ['abc', 'def']
 name = 'nonameinc'
@@ -13,7 +14,8 @@ for item in favs:
     print ('%s likes %s' %(name, item))
 ''')
 
-
+#We define two classes that inherits from NodeVisitor and NodeTransformer.
+#Obf_visitor parses tree in order to print INT and STR variables.
 class Obf_visit(ast.NodeVisitor):
     def __init__(self):
         ast.NodeVisitor.__init__(self)
@@ -24,7 +26,7 @@ class Obf_visit(ast.NodeVisitor):
         if isinstance(node.s, str):
             print ("String: %s" % node.s)
 
-
+#Obf_change parses tree in order to change these variables
 class Obf_change(ast.NodeTransformer):
     def __init__(self):
         ast.NodeTransformer.__init__(self)
@@ -34,8 +36,6 @@ class Obf_change(ast.NodeTransformer):
     def visit_Str(self, node):
         if isinstance(node.s, str):
             return ast.Str(node.s[:-1])
-          
-
 
 Obf_v = Obf_visit()
 Obf_c = Obf_change()
