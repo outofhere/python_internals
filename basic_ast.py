@@ -1,7 +1,7 @@
 import ast
 #Creating nodes in two different ways. 
-#First node is a simple multiplying
-#Second one is a printing piece
+#First node is a simple multiplying.
+#Second one is a printing piece.
 node_add = ast.Expression(ast.BinOp(
                 ast.Num(5),
                 ast.Mult(),
@@ -26,7 +26,7 @@ class Obf_visit(ast.NodeVisitor):
         if isinstance(node.s, str):
             print ("String: %s" % node.s)
 
-#Obf_change parses tree in order to change these variables
+#Obf_change parses tree in order to change these variables.
 class Obf_change(ast.NodeTransformer):
     def __init__(self):
         ast.NodeTransformer.__init__(self)
@@ -51,4 +51,3 @@ print(Obf_c.visit(node_add_fx))
 print ('\n')
 print(Obf_v.visit(node_pt_fx))
 print(Obf_v.visit(node_add_fx))
-
